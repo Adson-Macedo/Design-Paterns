@@ -128,8 +128,9 @@ public class ControleAcademico {
         disciplina.adicionarAulaATurma(nomeTurma, diaDaSemana, horarioDaAula);
     }
     
-    public List<String> getHorarioAulas(Academico Academico) throws Exception{
-        return Academico.getHorarioAulas();
+    public List<String> getHorarioAulas(String matriculaAcademico) throws Exception{
+        Academico academico = getAcademico(matriculaAcademico);
+        return academico.getHorarioAulas();
     }
 
     public List<String> getAlunosDaDisciplina(String nomeDisciplina) throws Exception{
