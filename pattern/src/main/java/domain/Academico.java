@@ -43,11 +43,11 @@ public class Academico {
         this.horarios.add(horario);
     }
 
-    public String toString(){
+    public String toString() {
         return "Matricula: " + this.matricula + " Nome: " + this.nome;
     }
 
-    public List<String> getHorarioAulas(){
+    public List<String> getHorarioAulas() {
         List<String> strings = new ArrayList<>();
 
         for (Horario horario : horarios) {
