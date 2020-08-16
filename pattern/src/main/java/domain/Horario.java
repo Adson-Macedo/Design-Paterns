@@ -2,12 +2,14 @@ package domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class Horario {
-    private List<Aula> aulas;
+    private Set<Aula> aulas;
 
     public Horario() {
-        this.aulas = new ArrayList<>();
+        this.aulas = new TreeSet<>();
     }
 
     public void addAula(String horario, String diaDaSemana, Disciplina disciplina) throws Exception{
@@ -15,7 +17,7 @@ public class Horario {
     }
 
     public List<Aula> getAulas() {
-        return aulas;
+        return new ArrayList<>(aulas);
     }
 
     public List<String> toStrings(){
@@ -26,5 +28,9 @@ public class Horario {
         }
 
         return strings;
+    }
+
+    protected void concat(Horario horario) {
+        this.aulas.addAll(horario.getAulas());
     }
 }

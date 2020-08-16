@@ -29,16 +29,16 @@ public class Main {
 
     private static void criarTurmas() throws Exception{
         ca.criarTurma("Diurno", "MAP", "123456789");        //  Sabrina
-        ca.adicionarAula("MAP", "Diurno", "Segunda", "09:00");
         ca.adicionarAula("MAP", "Diurno", "Quarta", "11:00");
+        ca.adicionarAula("MAP", "Diurno", "Segunda", "09:00");
 
         ca.criarTurma("Noturno", "MAP", "123456789");       //  Sabrina
-        ca.adicionarAula("MAP", "Noturno", "Terça", "18:00");
-        ca.adicionarAula("MAP", "Noturno", "Quinta", "20:00");
+        ca.adicionarAula("MAP", "Noturno", "Quarta", "20:00");
+        ca.adicionarAula("MAP", "Noturno", "Sexta", "18:00");
 
         ca.criarTurma("Diurno", "Discreta I", "987654321"); //  Toin
-        ca.adicionarAula("Discreta I", "Diurno", "Segunda", "08:00");
         ca.adicionarAula("Discreta I", "Diurno", "Quarta", "10:00");
+        ca.adicionarAula("Discreta I", "Diurno", "Segunda", "08:00");
         
         ca.criarTurma("Diurno", "Logica", "987654321");     //  Toin
         ca.adicionarAula("Logica", "Diurno", "Terça", "09:00");
