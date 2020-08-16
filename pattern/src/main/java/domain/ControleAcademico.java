@@ -59,41 +59,41 @@ public class ControleAcademico {
     public Aluno getAluno(int id) throws Exception{
         Academico aluno = getAcademico(id);
         
-        if (aluno instanceof Aluno){
-            return (Aluno) aluno;
+        if (!(aluno instanceof Aluno)){
+            throw new Exception(Messages.MSG_NOT_FOUND_EXCEPTION);
         }        
         
-        throw new Exception(Messages.MSG_NOT_FOUND_EXCEPTION);
+        return (Aluno) aluno;
     }
 
     public Aluno getAluno(String matricula) throws Exception{
         Academico aluno = getAcademico(matricula);
         
-        if (aluno instanceof Aluno){
-            return (Aluno) aluno;
+        if (!(aluno instanceof Aluno)){
+            throw new Exception(Messages.MSG_NOT_FOUND_EXCEPTION);
         }        
         
-        throw new Exception(Messages.MSG_NOT_FOUND_EXCEPTION);
+        return (Aluno) aluno;
     }
 
     public Professor getProfessor(int id) throws Exception{
         Academico professor = getAcademico(id);
         
-        if (professor instanceof Professor){
-            return (Professor) professor;
+        if (!(professor instanceof Professor)){
+            throw new Exception(Messages.MSG_NOT_FOUND_EXCEPTION);
         }        
         
-        throw new Exception(Messages.MSG_NOT_FOUND_EXCEPTION);
+        return (Professor) professor;
     }
 
     public Professor getProfessor(String matricula) throws Exception{
         Academico professor = getAcademico(matricula);
         
-        if (professor instanceof Professor){
-            return (Professor) professor;
+        if (!(professor instanceof Professor)){
+            throw new Exception(Messages.MSG_NOT_FOUND_EXCEPTION);
         }        
         
-        throw new Exception(Messages.MSG_NOT_FOUND_EXCEPTION);
+        return (Professor) professor;
     }
 
     public void criarDisciplina(String descricao){

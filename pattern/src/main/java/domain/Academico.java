@@ -47,14 +47,20 @@ public class Academico {
         return "Matricula: " + this.matricula + " Nome: " + this.nome;
     }
 
-    public List<String> getHorarioAulas() {
-        List<String> strings = new ArrayList<>();
+    private Horario getHorarioGeral() {
+        Horario horarioTotal = new Horario();
 
         for (Horario horario : horarios) {
-            strings.addAll(horario.toStrings());
+            horarioTotal.concat(horario);
         }
 
-        return strings;
+        return horarioTotal;
+    }
+
+    public List<String> getHorarioAulas() {
+        Horario horarioGeral = getHorarioGeral();
+
+        return horarioGeral.toStrings();
     }
 
     public List<Horario> getHorarios() {

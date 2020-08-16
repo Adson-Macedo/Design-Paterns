@@ -3,7 +3,7 @@ package domain;
 import utils.Utils;
 import utils.Messages;
 
-public class Aula {
+public class Aula implements Comparable<Aula> {
     private String horarioAula;
     private String diaDaSemana;
     private Disciplina disciplina;
@@ -46,4 +46,16 @@ public class Aula {
     public String toString(){
         return diaDaSemana + "\t" + horarioAula + "\t" + disciplina.getDescricao();
     }
+
+    @Override
+    public int compareTo(Aula aula) {
+        int numDia1 = Utils.getNumeroDia(this.diaDaSemana);
+        int numDia2 = Utils.getNumeroDia(aula.diaDaSemana);
+
+        if (numDia1 < numDia2) return -1;
+        if (numDia1 > numDia2) return  1;
+
+        return this.horarioAula.compareTo(aula.horarioAula);
+    }
+
 }
