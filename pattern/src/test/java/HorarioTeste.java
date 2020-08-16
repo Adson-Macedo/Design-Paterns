@@ -50,14 +50,14 @@ public class HorarioTeste {
     
         assertEquals(horario.getAulas().size(), 6);
         
-        assertEquals(horario.getAulas().get(0), "Segunda\t18:00\tIHC");
-        assertEquals(horario.getAulas().get(1), "Segunda\t20:00\tWEB");
+        assertEquals(horario.getAulas().get(0).toString(), "Segunda\t18:00\tIHC");
+        assertEquals(horario.getAulas().get(1).toString(), "Segunda\t20:00\tWEB");
         
-        assertEquals(horario.getAulas().get(2), "Terça\t20:00\tMAP");
-        assertEquals(horario.getAulas().get(3), "Quarta\t18:00\tIHC");
+        assertEquals(horario.getAulas().get(2).toString(), "Terça\t20:00\tMAP");
+        assertEquals(horario.getAulas().get(3).toString(), "Quarta\t18:00\tIHC");
         
-        assertEquals(horario.getAulas().get(4), "Quinta\t18:00\tMAP");
-        assertEquals(horario.getAulas().get(5), "Sexta\t20:00\tWEB");
+        assertEquals(horario.getAulas().get(4).toString(), "Quinta\t18:00\tMAP");
+        assertEquals(horario.getAulas().get(5).toString(), "Sexta\t20:00\tWEB");
     }
 
     @Test
@@ -71,7 +71,7 @@ public class HorarioTeste {
         horario.addAula("20:00", "Terça", disciplina1);
     
         assertEquals(horario.getAulas().size(), 2);
-        assertEquals(horario.getAulas().get(0), "Terça\t18:00\tWEB");
-        assertEquals(horario.getAulas().get(1), "Terça\t20:00\tMAP");
+        assertEquals(horario.getAulas().get(0).toString(), "Terça\t18:00\tWEB");
+        assertEquals(horario.getAulas().get(1).toString(), "Terça\t20:00\tMAP");
     }
 }

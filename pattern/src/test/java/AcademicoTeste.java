@@ -51,7 +51,7 @@ public class AcademicoTeste {
         academico.adicionarHorario(horario);
 
         assertEquals(academico.getHorarioAulas().size(), 2);
-        assertEquals(academico.getHorarioAulas().get(0), "Terça\t20:00\tMAP");
-        assertEquals(academico.getHorarioAulas().get(1), "Terça\t18:00\tWEB");
+        assertEquals(academico.getHorarioAulas().get(0), "Terça\t18:00\tWEB");
+        assertEquals(academico.getHorarioAulas().get(1), "Terça\t20:00\tMAP");
     }
 }
