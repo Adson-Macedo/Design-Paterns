@@ -2,15 +2,18 @@ package domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
+
 import utils.Messages;
 
 public class ControleAcademico {
     private List<Disciplina> disciplinas;
-    private List<Pessoa> pessoas;
+    private List<Academico> academicos;
 
     public ControleAcademico(){
         this.disciplinas = new ArrayList<>();
-        this.pessoas = new ArrayList<>();
+        this.academicos = new ArrayList<>();
     }
 
     public Disciplina getDisciplina(int id) throws Exception{
@@ -33,43 +36,63 @@ public class ControleAcademico {
         throw new Exception(Messages.MSG_NOT_FOUND_EXCEPTION);
     }
 
-    public Aluno getAluno(int id) throws Exception{
-        for (Pessoa pessoa : pessoas) {
-            if ((pessoa instanceof Aluno) && (pessoa.getId() == id)) {
-                return (Aluno) pessoa;
+    public Academico getAcademico(int id) throws Exception {
+        for (Academico academico : academicos) {
+            if (academico.getId() == id) {
+                return academico;
             }
         }
 
+        throw new Exception(Messages.MSG_NOT_FOUND_EXCEPTION);
+    }
+
+    public Academico getAcademico(String matricula) throws Exception{
+        for (Academico academico : this.academicos) {
+            if (academico.getMatricula().equals(matricula)) {
+                return academico;
+            }
+        }
+
+        throw new Exception(Messages.MSG_NOT_FOUND_EXCEPTION);
+    }
+
+    public Aluno getAluno(int id) throws Exception{
+        Academico aluno = getAcademico(id);
+        
+        if (aluno instanceof Aluno){
+            return (Aluno) aluno;
+        }        
+        
         throw new Exception(Messages.MSG_NOT_FOUND_EXCEPTION);
     }
 
     public Aluno getAluno(String matricula) throws Exception{
-        for (Pessoa pessoa : this.pessoas) {
-            if ((pessoa instanceof Aluno) && (pessoa.getMatricula().equals(matricula))) {
-                return (Aluno) pessoa;
-            }
-        }
-
+        Academico aluno = getAcademico(matricula);
+        
+        if (aluno instanceof Aluno){
+            return (Aluno) aluno;
+        }        
+        
         throw new Exception(Messages.MSG_NOT_FOUND_EXCEPTION);
     }
 
     public Professor getProfessor(int id) throws Exception{
-        for (Pessoa pessoa : pessoas) {
-            if ((pessoa instanceof Professor) && (pessoa.getId() == id)) {
-                return (Professor) pessoa;
-            }
-        }
-
+        Academico professor = getAcademico(id);
+        
+        if (professor instanceof Professor){
+            return (Professor) professor;
+        }        
+        
         throw new Exception(Messages.MSG_NOT_FOUND_EXCEPTION);
     }
 
     public Professor getProfessor(String matricula) throws Exception{
-        for (Pessoa pessoa : pessoas) {
-            if ((pessoa instanceof Professor) && (pessoa.getMatricula().equals(matricula))) {
-                return (Professor) pessoa;
-            }
-        }
-
+        Academico professor = getAcademico(matricula);
+        
+        if (professor instanceof Professor){
+            return (Professor) professor;
+        }        
+        
         throw new Exception(Messages.MSG_NOT_FOUND_EXCEPTION);
     }
 
@@ -78,11 +101,11 @@ public class ControleAcademico {
     }
     
     public void criarAluno(String nome, String matricula){
-        this.pessoas.add(new Aluno(nome, matricula));
+        this.academicos.add(new Aluno(nome, matricula));
     }
 
     public void criarProfessor(String nome, String matricula){
-        this.pessoas.add(new Professor(nome, matricula));
+        this.academicos.add(new Professor(nome, matricula));
     }
 
     public void criarTurma(String nomeTurma, String nomeDisciplina, String matriculaProfessor) throws Exception{
@@ -92,6 +115,23 @@ public class ControleAcademico {
         disciplina.criarTurma(nomeTurma, professor);
     }
     
+    public void matricularAluno(String matriculaAluno, String nomeDisciplina, String nomeTurma) throws Exception{
+        Aluno aluno = getAluno(matriculaAluno);
+        Disciplina disciplina = getDisciplina(nomeDisciplina);
+        
+        disciplina.matricularAlunoNaTurma(aluno, nomeTurma);
+    }
+    
+    public void adicionarAula(String nomeDisciplina, String nomeTurma, String diaDaSemana, String horarioDaAula) throws Exception{
+        Disciplina disciplina = getDisciplina(nomeDisciplina);
+        
+        disciplina.adicionarAulaATurma(nomeTurma, diaDaSemana, horarioDaAula);
+    }
+    
+    public List<String> getHorarioAulas(Academico Academico) throws Exception{
+        return Academico.getHorarioAulas();
+    }
+
     public List<String> getAlunosDaDisciplina(String nomeDisciplina) throws Exception{
         Disciplina disciplina = getDisciplina(nomeDisciplina);
 
@@ -104,16 +144,21 @@ public class ControleAcademico {
         return alunos;
     }
 
-    public void matricularAluno(String matriculaAluno, String nomeDisciplina, String nomeTurma) throws Exception{
-        Aluno aluno = getAluno(matriculaAluno);
-        Disciplina disciplina = getDisciplina(nomeDisciplina);
-        
-        disciplina.matricularAlunoNaTurma(aluno, nomeTurma);
-    }
-    
-    public void adicionarAula(String nomeDisciplina, String nomeTurma, String diaDaSemana, String horarioDaAula) throws Exception{
-        Disciplina disciplina = getDisciplina(nomeDisciplina);
+    public List<String> getDisciplinasDoAcademico(String matricula) throws Exception {
+        Set<String> disciplinas = new TreeSet<String>();
 
-        disciplina.adicionarAulaATurma(nomeTurma, diaDaSemana, horarioDaAula);
+        Academico Academico = getAcademico(matricula);
+
+        for (Horario horario : Academico.getHorarios()) {
+            for (Aula aula : horario.getAulas()) {
+                disciplinas.add(aula.getDisciplina().getDescricao());
+            }
+        }
+
+        return new ArrayList<>(disciplinas);
+    }
+
+    public Integer getNumeroDisciplinasAcademico(String matricula) throws Exception {
+        return getDisciplinasDoAcademico(matricula).size();
     }
 }

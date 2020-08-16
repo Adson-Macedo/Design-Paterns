@@ -3,7 +3,7 @@ package domain;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Pessoa {
+public class Academico {
     private static int contador = 1;
 
     private final Integer id;
@@ -11,7 +11,7 @@ public class Pessoa {
     private String matricula;
     protected List<Horario> horarios;
 
-    public Pessoa(final String nome, final String matricula) {
+    public Academico(final String nome, final String matricula) {
         this.id = contador++;
 
         this.nome = nome;
@@ -55,5 +55,9 @@ public class Pessoa {
         }
 
         return strings;
+    }
+
+    public List<Horario> getHorarios() {
+        return horarios;
     }
 }

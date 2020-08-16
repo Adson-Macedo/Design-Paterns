@@ -39,6 +39,10 @@ public class Aula {
         return diaDaSemana;
     }
 
+    public Disciplina getDisciplina() {
+        return disciplina;
+    }
+    
     public String toString(){
         return diaDaSemana + "\t" + horarioAula + "\t" + disciplina.getDescricao();
     }
