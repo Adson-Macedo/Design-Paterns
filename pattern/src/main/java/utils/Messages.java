@@ -1,7 +1,9 @@
 package utils;
 
 public abstract class Messages {
-    public static final String MSG_NOT_FOUND_EXCEPTION = "Registro não encontrado!";
-    public static final String MSG_FORMATO_DE_HORARIO_INVALIDO_EXCEPTION = "Formato de Horário Inválido!";
-    public static final String MSG_DIA_DA_SEMANA_INVALIDO_EXCEPTION = "Dia da Semana Inválido!";
+    public static final String MSG_ALTURA_INVALIDA = "Altura inválida";
+    public static final String MSG_LARGURA_INVALIDA = "Largura inválida";
+    public static final String MSG_RAIO_INVALIDO = "Raio inválido";
+    public static final String MSG_LADO_INVALIDO = "Lado inválido";
+    public static final String MSG_INDEX_INVALIDO = "Índice inválido";
 }
