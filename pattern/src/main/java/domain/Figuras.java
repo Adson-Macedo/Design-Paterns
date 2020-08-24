@@ -28,7 +28,7 @@ public class Figuras {
         this.figuras.add(new Quadrado(lado));
     }
 
-    public void adicionarCirculo(int raio) throws Exception {
+    public void adicionarCirculo(double raio) throws Exception {
         this.figuras.add(new Circulo(raio));
     }
 
