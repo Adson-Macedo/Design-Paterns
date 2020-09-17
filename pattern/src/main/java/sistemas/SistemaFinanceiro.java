@@ -6,11 +6,11 @@ public class SistemaFinanceiro {
     }
 
     public String cadastrarDespesa(String data, double valor) {
-        return "{data: '" + data + "', valor: 'R$" + String.format("R$ %.2f", valor) + "'}";
+        return "{data: '" + data + "', valor: '" + String.format("R$ %.2f", valor) + "'}";
     }
 
     public String cadastrarReceita(String data, double valor) {
-        return "data: " + data + ", Valor: R$" + String.format("R$ %.2f", valor);
+        return "{data: '" + data + "', valor: '" + String.format("R$ %.2f", valor) + "'}";
     }
 
     public String obterFolhaDePagamento() {

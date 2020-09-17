@@ -2,7 +2,6 @@ package sistemas;
 
 public class SistemaAdministrativo {
 
-
     public SistemaAdministrativo() {
     }
 
