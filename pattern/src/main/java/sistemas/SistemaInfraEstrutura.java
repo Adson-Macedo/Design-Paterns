@@ -9,7 +9,7 @@ public class SistemaInfraEstrutura {
     }
 
     public String alocarAtividadeParaSala(int idSala, String atividade, String horario, String diaDaSemana) {
-        return "{sala: '" + idSala + "numero: '0057', andar: '4', " + "atividade: '" + atividade + "', horário: '"
+        return "{sala: '" + idSala + "', numero: '0057', andar: '4', " + "atividade: '" + atividade + "', horário: '"
                 + horario + "', dia: '" + diaDaSemana + "'}";
     }
 

@@ -1,16 +1,17 @@
 package sistemas;
 
+import java.util.Locale;
+
 public class SistemaFinanceiro {
     public SistemaFinanceiro() {
-
     }
 
     public String cadastrarDespesa(String data, double valor) {
-        return "{data: '" + data + "', valor: '" + String.format("R$ %.2f", valor) + "'}";
+        return "{data: '" + data + "', valor: '" + String.format(Locale.US, "R$ %.2f", valor) + "'}";
     }
 
     public String cadastrarReceita(String data, double valor) {
-        return "{data: '" + data + "', valor: '" + String.format("R$ %.2f", valor) + "'}";
+        return "{data: '" + data + "', valor: '" + String.format(Locale.US, "R$ %.2f", valor) + "'}";
     }
 
     public String obterFolhaDePagamento() {
