@@ -1,16 +1,19 @@
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import domain.AdaptedList;
 import domain.AdaptedMap;
 
 public class Main {
 
     public static void main(String[] args) {
-        List<Integer> keys = new ArrayList<Integer>();
-        List<String> values = new ArrayList<String>();
-
         try {
+            List<Integer> keys = new ArrayList<Integer>();
+            List<String> values = new ArrayList<String>();
+
             Map<Integer, String> adaptador1 = new AdaptedMap<>(keys, values);
             Map<String, Integer> adaptador2 = new AdaptedMap<>(new ArrayList<>(), new ArrayList<>());
 
@@ -65,5 +68,31 @@ public class Main {
         } catch (Exception e) {
             System.out.println("Erro: " + e.getMessage());
         }
+        
+        System.out.println("*****************************************************");
+        List<String> lista1 = new AdaptedList<>(new HashMap<Integer, String>());
+
+        System.out.println("List size: " + lista1.size());
+        lista1.add("Uma string");
+        lista1.add("Outra string");
+        lista1.add("Mais uma string");
+        lista1.add("Penultima string");
+        lista1.add("Ultima string");
+        System.out.println("List size: " + lista1.size());
+        System.out.println("lista1[0]: " + lista1.get(0));
+        
+        for (String string : lista1){
+            System.out.print(string + ", ");
+        }
+
+        System.out.println();
+        System.out.println(Arrays.toString(lista1.toArray()));
+
+        lista1.clear();
+        
+        System.out.println("List size: " + lista1.size());
+        System.out.println(Arrays.toString(lista1.toArray()));
     }
+
+    
 }
