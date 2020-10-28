@@ -96,6 +96,9 @@ public class AdaptedMapTeste {
         adaptedMap.put(15, "Testes Atualizado");
         assertEquals(adaptedMap.size(), 3);
         assertEquals(adaptedMap.get(15), "Testes Atualizado");
+
+        adaptedMap.put(25, "Integração");
+        assertEquals(adaptedMap.size(), 4);
     }
 
     @Test
