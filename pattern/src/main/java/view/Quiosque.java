@@ -13,13 +13,16 @@ public class Quiosque implements OnibusListener, Display {
     public String gerarStringOnibus(Onibus onibus) {
         String lista = String.format("Onibus %03d - %s (Quiosque: %d)\n", onibus.getId(), onibus.getRota(), this.id);
 
-        for (int i = 1; i <= onibus.getAcentos().length; i++) {
-            lista += String.format("%sAcento %03d - %s\n", 
-                Colors.getStatusColor(onibus.getStatusAcento(i)),
-                    onibus.getAcentos()[i-1].getId(), onibus.getStatusAcentoTexto(i));
-        }
-        lista += Colors.ANSI_RESET;
+        try{
+            for (int i = 1; i <= onibus.getAcentos().length; i++) {
+                lista += String.format("%sAcento %03d - %s\n", 
+                    Colors.getStatusColor(onibus.getStatusAcento(i)),
+                        onibus.getAcentos()[i-1].getId(), onibus.getStatusAcentoTexto(i));
+            }
+            lista += Colors.ANSI_RESET;
+        } catch (Exception e){
 
+        }
         return lista;
     }
 

@@ -24,17 +24,21 @@ public class Painel implements OnibusListener, Display {
         lateral += "+\n";
 
         String primeiraFila = "|  |";
-        for (int i = 1; i <= onibus.getNumeroAcentos(); i += 2) {
-            primeiraFila += Colors.getStatusColor(onibus.getStatusAcento(i)).concat(String.format("%02d ", i));
-        }
-        primeiraFila = primeiraFila.concat(Colors.ANSI_RESET).concat("|\n");
-
         String segundaFila = "|M |";
-        for (int i = 2; i <= onibus.getNumeroAcentos(); i += 2) {
-            segundaFila += Colors.getStatusColor(onibus.getStatusAcento(i)).concat(String.format("%02d ", i));
-        }
-        segundaFila = segundaFila.concat(Colors.ANSI_RESET).concat("|\n");
+        
+        try{
+            for (int i = 1; i <= onibus.getNumeroAcentos(); i += 2) {
+                primeiraFila += Colors.getStatusColor(onibus.getStatusAcento(i)).concat(String.format("%02d ", i));
+            }
+            primeiraFila = primeiraFila.concat(Colors.ANSI_RESET).concat("|\n");
 
+            for (int i = 2; i <= onibus.getNumeroAcentos(); i += 2) {
+                segundaFila += Colors.getStatusColor(onibus.getStatusAcento(i)).concat(String.format("%02d ", i));
+            }
+            segundaFila = segundaFila.concat(Colors.ANSI_RESET).concat("|\n");
+        } catch (Exception e) {
+
+        }
         return descricao.concat(lateral).concat(primeiraFila).concat(segundaFila).concat(lateral);
     }
 

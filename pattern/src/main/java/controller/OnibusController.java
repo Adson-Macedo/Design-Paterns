@@ -17,17 +17,21 @@ public class OnibusController {
         this.frota = new ArrayList<>();
     }
 
-    public void adicionarOnibus(Onibus onibus) throws Exception {
+    public boolean adicionarOnibus(Onibus onibus) throws Exception {
+        // if (...)
         this.frota.add(onibus);
+        return true;
     }
 
-    public void reservarPassagem(Onibus onibus, int numeroAcento, Passageiro passageiro) throws Exception {
-        onibus.reservarAcento(numeroAcento, passageiro);
+    public boolean reservarPassagem(Onibus onibus, int numeroAcento, Passageiro passageiro) throws Exception {
+        return onibus.reservarAcento(numeroAcento, passageiro);
     }
 
-    public void comprarPassagem(Onibus onibus, int numeroAcento, Passageiro passageiro) throws Exception {
-        onibus.comprarAcento(numeroAcento, passageiro);
+    public boolean comprarPassagem(Onibus onibus, int numeroAcento, Passageiro passageiro) throws Exception {
+        return onibus.comprarAcento(numeroAcento, passageiro);
     }
+
+    // cancelar reserva
 
     protected Onibus getOnibusById(int idOnibus) throws Exception {
         for (Onibus onibus : frota) {

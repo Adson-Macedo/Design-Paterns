@@ -10,8 +10,10 @@ public class Onibus {
     private int id;
     private String rota;
     private Acento acentos[];
+    
+    public static final String STATUS[] = { "Disponível", "Reservado", "Vendido" };
 
-    private List<OnibusListener> listeners;
+    private List<OnibusListener> listeners; // map
 
     public Onibus(int qtdAcentos, String rota) throws Exception {
         if (qtdAcentos % 2 == 1)
@@ -52,7 +54,7 @@ public class Onibus {
     private synchronized void notifyEvent() {
         List<OnibusListener> listenersClone;
         synchronized (this) {
-            listenersClone = (List) ((ArrayList) this.listeners).clone();
+            listenersClone = new ArrayList<>(this.listeners);
         }
 
         OnibusEvent event = new OnibusEvent(this);
@@ -61,37 +63,56 @@ public class Onibus {
         }
     }
 
-    public synchronized void reservarAcento(int numAcento, Passageiro passageiro) throws Exception {
-        this.acentos[numAcento - 1].reservar(passageiro);
+    public synchronized boolean reservarAcento(int numeroAcento, Passageiro passageiro) throws Exception {
+        validarNumeroAcento(numeroAcento);
+        
+        this.acentos[numeroAcento - 1].reservar(passageiro);
         notifyEvent();
+
+        return true;
     }
 
-    public synchronized void comprarAcento(int numAcento, Passageiro passageiro) throws Exception {
-        this.acentos[numAcento - 1].comprar(passageiro);
+    public synchronized boolean comprarAcento(int numeroAcento, Passageiro passageiro) throws Exception {
+        validarNumeroAcento(numeroAcento);
+        
+        this.acentos[numeroAcento - 1].comprar(passageiro);
         notifyEvent();
+        
+        return true;
     }
 
-    public synchronized void cancelarReserva(int numAcento) throws Exception {
-        this.acentos[numAcento - 1].cancelarReserva();
+    public synchronized boolean cancelarReserva(int numeroAcento) throws Exception {
+        validarNumeroAcento(numeroAcento);
+        
+        this.acentos[numeroAcento - 1].cancelarReserva();
         notifyEvent();
+        
+        return true;
     }
 
     public int getNumeroAcentos() {
         return this.acentos.length;
     }
 
-    public int getStatusAcento(int numeroAcento) {
+    public int getStatusAcento(int numeroAcento) throws Exception {
+        validarNumeroAcento(numeroAcento);
         return this.acentos[numeroAcento - 1].getStatus();
     }
 
-    public String getStatusAcentoTexto(int numeroAcento) {
-        String status[] = { "Disponível", "Reservado", "Vendido" };
-        return status[this.acentos[numeroAcento - 1].getStatus()];
+    public String getStatusAcentoTexto(int numeroAcento) throws Exception{
+        validarNumeroAcento(numeroAcento);
+        
+        return STATUS[this.acentos[numeroAcento - 1].getStatus()];
     }
 
     public synchronized void addListener(OnibusListener listener) {
         if (!this.listeners.contains(listener))
             this.listeners.add(listener);
+    }
+
+    private void validarNumeroAcento(int numeroAcento) throws Exception{
+        if (numeroAcento < 1 || numeroAcento > getNumeroAcentos())
+            throw new Exception("Número de acento inválido");
     }
 
 }
