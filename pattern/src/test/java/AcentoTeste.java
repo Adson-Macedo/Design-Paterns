@@ -14,6 +14,7 @@ public class AcentoTeste {
     int VENDIDO = 2;
 
     Acento acento;
+    Passageiro passageiro = new Passageiro("Thairam", "111.222.333-44");
 
     @BeforeEach
     public void setUp() {
@@ -30,19 +31,19 @@ public class AcentoTeste {
 
     @Test
     public void verificarReservar() throws Exception {
-        acento.reservar(new Passageiro("Thairam", "111.222.333-44"));
+        acento.reservar(passageiro);
         assertEquals(acento.getStatus(), RESERVADO);
     }
 
     @Test
     public void verificarComprar() throws Exception {
-        acento.comprar(new Passageiro("Thairam", "111.222.333-44"));
+        acento.comprar(passageiro);
         assertEquals(acento.getStatus(), VENDIDO);
     }
 
     @Test
     public void verificarCancelarReserva() throws Exception {
-        acento.reservar(new Passageiro("Thairam", "111.222.333-44"));
+        acento.reservar(passageiro);
         assertEquals(acento.getStatus(), RESERVADO);
 
         acento.cancelarReserva();
@@ -51,10 +52,10 @@ public class AcentoTeste {
 
     @Test
     public void verificarReservarException() throws Exception {
-        acento.reservar(new Passageiro("Thairam", "111.222.333-44"));
+        acento.reservar(passageiro);
 
         Exception exception = assertThrows(Exception.class, () -> {
-            acento.reservar(new Passageiro("Thairam", "111.222.333-44"));
+            acento.reservar(passageiro);
         });
 
         assertEquals("Não foi possível realizar a reserva: acento já reservado ou vendido!", exception.getMessage());
@@ -62,7 +63,7 @@ public class AcentoTeste {
 
     @Test
     public void verificarComprarException() throws Exception {
-        acento.reservar(new Passageiro("Thairam", "111.222.333-44"));
+        acento.reservar(passageiro);
 
         Exception exception = assertThrows(Exception.class, () -> {
             acento.comprar(new Passageiro("Adson", "555.666.777-88"));
