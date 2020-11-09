@@ -1,7 +1,7 @@
 package controller;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import model.Onibus;
 import model.Passageiro;
@@ -11,15 +11,18 @@ import model.Passageiro;
  */
 public class OnibusController {
     //  Repository
-    private List<Onibus> frota;
+    private Map<Integer, Onibus> frota;
 
-    OnibusController() {
-        this.frota = new ArrayList<>();
+    public OnibusController() {
+        this.frota = new HashMap<>();
     }
 
     public boolean adicionarOnibus(Onibus onibus) throws Exception {
-        // if (...)
-        this.frota.add(onibus);
+        if (frota.get(onibus.getId()) != null)
+            throw new Exception("Onibus já cadastrado");
+        
+        this.frota.put(onibus.getId(), onibus);
+        
         return true;
     }
 
@@ -31,14 +34,11 @@ public class OnibusController {
         return onibus.comprarAcento(numeroAcento, passageiro);
     }
 
-    // cancelar reserva
+    public boolean cancelarReserva(Onibus onibus, int numeroAcento) throws Exception {
+        return onibus.cancelarReserva(numeroAcento);
+    }
 
     protected Onibus getOnibusById(int idOnibus) throws Exception {
-        for (Onibus onibus : frota) {
-            if (onibus.getId() == idOnibus) {
-                return onibus;
-            }
-        }
-        return null;
+        return frota.get(idOnibus);
     }
 }
