@@ -1,3 +1,5 @@
+import java.util.List;
+
 import controller.Rodoviaria;
 
 public class Main {
@@ -60,7 +62,19 @@ public class Main {
             System.out.println(e.getMessage());
         }
 
+        try{
+            List<String> log = rodoviaria.getLog(100001);
+
+            for (String line : log){
+                System.out.println(line);
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+
     }
+
+
 }
 
 /*

@@ -105,4 +105,13 @@ public class Rodoviaria {
 
         return true;
     }
+
+    public List<String> getLog(int idDisplay) throws Exception{
+        Display display = getListenerById(idDisplay);
+
+        if (display == null)
+            throw new Exception("Display não encontrado");
+        
+        return display.getLog();
+    }
 }

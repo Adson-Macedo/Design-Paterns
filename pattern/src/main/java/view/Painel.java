@@ -1,5 +1,8 @@
 package view;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import controller.listener.OnibusListener;
 import model.Onibus;
 import model.OnibusEvent;
@@ -7,10 +10,12 @@ import utils.Colors;
 
 public class Painel implements OnibusListener, Display {
     private static int contador = 100000;
+    private List<String> log;
     private int id;
 
     public Painel() {
         this.id = ++contador;
+        this.log = new ArrayList<>();
     }
 
     @Override
@@ -44,21 +49,38 @@ public class Painel implements OnibusListener, Display {
 
     @Override
     public void reservaCancelada(OnibusEvent e) {
-        System.out.println(gerarStringOnibus((Onibus) e.getSource()));
+        Onibus onibus = (Onibus) e.getSource();
+        
+        this.log.add(String.format("reserva cancelada no onibus %03d", onibus.getId()));
+        System.out.println("Evento: Reserva Cancelada");
+        System.out.println(gerarStringOnibus(onibus));
     }
-
+    
     @Override
     public void passagemReservada(OnibusEvent e) {
-        System.out.println(gerarStringOnibus((Onibus) e.getSource()));
+        Onibus onibus = (Onibus) e.getSource();
+        
+        this.log.add(String.format("passagem reservada no onibus %03d", onibus.getId()));
+        System.out.println("Evento: Passagem Reservada");
+        System.out.println(gerarStringOnibus(onibus));
     }
-
+    
     @Override
     public void passagemComprada(OnibusEvent e) {
-        System.out.println(gerarStringOnibus((Onibus) e.getSource()));
+        Onibus onibus = (Onibus) e.getSource();
+        
+        this.log.add(String.format("passagem comprada no onibus %03d", onibus.getId()));
+        System.out.println("Evento: Passagem Comprada");
+        System.out.println(gerarStringOnibus(onibus));
     }
 
     @Override
     public int getId() {
         return this.id;
+    }
+
+    @Override
+    public List<String> getLog() {
+        return this.log;
     }
 }

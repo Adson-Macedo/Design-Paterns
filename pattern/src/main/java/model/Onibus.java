@@ -51,7 +51,10 @@ public class Onibus {
         return acentos;
     }
 
-    private synchronized void notifyEvent() {
+    public synchronized boolean reservarAcento(int numeroAcento, Passageiro passageiro) throws Exception {
+        validarNumeroAcento(numeroAcento);
+        this.acentos[numeroAcento - 1].reservar(passageiro);
+
         List<OnibusListener> listenersClone;
         synchronized (this) {
             listenersClone = new ArrayList<>(this.listeners);
@@ -61,31 +64,40 @@ public class Onibus {
         for (OnibusListener listener : listenersClone) {
             listener.passagemReservada(event);
         }
-    }
-
-    public synchronized boolean reservarAcento(int numeroAcento, Passageiro passageiro) throws Exception {
-        validarNumeroAcento(numeroAcento);
-        
-        this.acentos[numeroAcento - 1].reservar(passageiro);
-        notifyEvent();
 
         return true;
     }
 
     public synchronized boolean comprarAcento(int numeroAcento, Passageiro passageiro) throws Exception {
         validarNumeroAcento(numeroAcento);
-        
         this.acentos[numeroAcento - 1].comprar(passageiro);
-        notifyEvent();
-        
+
+        List<OnibusListener> listenersClone;
+        synchronized (this) {
+            listenersClone = new ArrayList<>(this.listeners);
+        }
+
+        OnibusEvent event = new OnibusEvent(this);
+        for (OnibusListener listener : listenersClone) {
+            listener.passagemComprada(event);
+        }
+
         return true;
     }
 
     public synchronized boolean cancelarReserva(int numeroAcento) throws Exception {
         validarNumeroAcento(numeroAcento);
-        
         this.acentos[numeroAcento - 1].cancelarReserva();
-        notifyEvent();
+
+        List<OnibusListener> listenersClone;
+        synchronized (this) {
+            listenersClone = new ArrayList<>(this.listeners);
+        }
+
+        OnibusEvent event = new OnibusEvent(this);
+        for (OnibusListener listener : listenersClone) {
+            listener.reservaCancelada(event);
+        }
         
         return true;
     }

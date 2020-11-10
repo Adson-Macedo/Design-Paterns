@@ -1,5 +1,7 @@
 package view;
 
+import java.util.List;
+
 import model.Onibus;
 /**
  * Display
@@ -7,4 +9,5 @@ import model.Onibus;
 public interface Display {
     public int getId();
     public String gerarStringOnibus(Onibus onibus);
+    public List<String> getLog();
 }
