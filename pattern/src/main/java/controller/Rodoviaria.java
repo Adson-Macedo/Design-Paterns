@@ -31,26 +31,31 @@ public class Rodoviaria {
         return rodoviaria;
     }
 
-    public void adicionarOnibus(int acentos, String rota) throws Exception {
+    public boolean adicionarOnibus(int acentos, String rota) throws Exception {
         this.onibusController.adicionarOnibus(new Onibus(acentos, rota));
+        return true;
     }
 
-    public void adicionarPassageiro(String nome, String cpf) throws Exception {
+    public boolean adicionarPassageiro(String nome, String cpf) throws Exception {
         if (passageiroController.getPassageiroByCPF(cpf) != null)
             throw new Exception("Passageiro já cadastrado!");
 
-        passageiroController.adicionarPassageiro(new Passageiro(nome, cpf));
+        this.passageiroController.adicionarPassageiro(new Passageiro(nome, cpf));
+
+        return true;
     }
 
-    public void adicionarQuiosque() {
+    public boolean adicionarQuiosque() {
         this.displays.add(new Quiosque());
+        return true;
     }
 
-    public void adicionarPainel() {
+    public boolean adicionarPainel() {
         this.displays.add(new Painel());
+        return true;
     }
 
-    public void reservarPassagem(int idOnibus, int numeroAcento, String cpfPassageiro) throws Exception {
+    public boolean reservarPassagem(int idOnibus, int numeroAcento, String cpfPassageiro) throws Exception {
         Onibus onibus = onibusController.getOnibusById(idOnibus);
         if (onibus == null)
             throw new Exception("Onibus não encontrado!");
@@ -59,10 +64,12 @@ public class Rodoviaria {
         if (passageiro == null)
             throw new Exception("Passageiro não encontrado!");
 
-        onibusController.reservarPassagem(onibus, numeroAcento, passageiro);
+        this.onibusController.reservarPassagem(onibus, numeroAcento, passageiro);
+
+        return true;
     }
 
-    public void comprarPassagem(int idOnibus, int numeroAcento, String cpfPassageiro) throws Exception {
+    public boolean comprarPassagem(int idOnibus, int numeroAcento, String cpfPassageiro) throws Exception {
         Onibus onibus = onibusController.getOnibusById(idOnibus);
         if (onibus == null)
             throw new Exception("Onibus não encontrado!");
@@ -71,7 +78,9 @@ public class Rodoviaria {
         if (passageiro == null)
             throw new Exception("Passageiro não encontrado!");
 
-        onibusController.comprarPassagem(onibus, numeroAcento, passageiro);
+        this.onibusController.comprarPassagem(onibus, numeroAcento, passageiro);
+
+        return true;
     }
 
     private Display getListenerById(int idDisplay) {
@@ -83,7 +92,7 @@ public class Rodoviaria {
         return null;
     }
 
-    public void addListenerTo(int idListener, int idOnibus) throws Exception {
+    public boolean addListenerTo(int idListener, int idOnibus) throws Exception {
         Onibus onibus = onibusController.getOnibusById(idOnibus);
         OnibusListener listener = (OnibusListener) getListenerById(idListener);
 
@@ -93,5 +102,7 @@ public class Rodoviaria {
             throw new Exception("Listener não encontrado");
 
         onibus.addListener(listener);
+
+        return true;
     }
 }

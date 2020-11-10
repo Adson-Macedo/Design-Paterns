@@ -9,7 +9,7 @@ import model.Passageiro;
  * PassageiroController
  */
 public class PassageiroController {
-    //  Repository
+    // Repository
     private Map<String, Passageiro> passageiros;
 
     public PassageiroController() {
@@ -20,9 +20,12 @@ public class PassageiroController {
         return this.passageiros.get(cpf);
     }
 
-    public void adicionarPassageiro(Passageiro passageiro) throws Exception {
+    public boolean adicionarPassageiro(Passageiro passageiro) throws Exception {
         if (this.passageiros.get(passageiro.getCpf()) != null)
             throw new Exception("CPF já cadastrado");
+
         this.passageiros.put(passageiro.getCpf(), passageiro);
+
+        return true;
     }
 }
