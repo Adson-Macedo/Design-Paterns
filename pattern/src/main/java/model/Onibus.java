@@ -7,13 +7,13 @@ import controller.listener.OnibusListener;
 
 public class Onibus {
     private static int contador = 0;
+    public static final String STATUS[] = { "Disponível", "Reservado", "Vendido" };
+    
     private int id;
     private String rota;
     private Acento acentos[];
-    
-    public static final String STATUS[] = { "Disponível", "Reservado", "Vendido" };
 
-    private List<OnibusListener> listeners; // map
+    private List<OnibusListener> listeners;
 
     public Onibus(int qtdAcentos, String rota) throws Exception {
         if (qtdAcentos % 2 == 1)
